@@ -9,11 +9,14 @@ exports.blogView = async (req,res)=>{
     const token = req.cookies.Token;
     const verified = jwt.verify(token,process.env.secret_key)
 
-
     axios.get(`http://localhost:${process.env.PORT}/api/blog/${req.params.blogid}`)
-    .then((response)=>{
-        // res.send(response.data)
-        res.render("pages/singleBlog",{blogData:response.data,author_id_cookie:verified._id})
+    .then((blogDataResponse)=>{
+        axios.get(`http://localhost:${process.env.PORT}/api/user/find/${blogDataResponse.data.author_id}`)
+        .then((authorDataResponse)=>{
+            res.render("pages/singleBlog",{blogData:blogDataResponse.data,
+                                            author_id_cookie:verified._id,
+                                            authorData:authorDataResponse.data})
+        })
         // res.send("Page")
     })
     .catch((error)=>{

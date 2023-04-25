@@ -33,8 +33,7 @@ exports.find = async (req,res)=>{
 
 }   
 
-
-// exports.find = (req,res)=>{
+// exports.userProfile = async (req,res)=>{
 
 // }
 
@@ -90,10 +89,20 @@ exports.login = async (req,res)=>{
         // console.log(user)
         token = jwt.sign({_id:user._id},process.env.secret_key,{expiresIn:'15d'})
         res.cookie("Token",token)
-        // console.log("Cookie Created expires in 30 minutes",token)
         res.redirect('/')
     }
     else{
         res.redirect('/login')
     }
+}
+
+exports.updateUser = (req,res)=>{
+    const userid = req.params.userid
+    userDB.findByIdAndUpdate(Object(userid),req.body)
+    .then((dauserInfo)=>{
+        res.json(userInfo)
+    })
+    .catch((err=>{
+        res.send(err)
+    }))
 }

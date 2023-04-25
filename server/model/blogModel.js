@@ -5,7 +5,6 @@ const BlogSchema = mongoose.Schema({
     title:String,
     content:String,
     date_posted:Date,
-    author_name:String
 })
 
 const Blog = mongoose.model('Blog',BlogSchema)

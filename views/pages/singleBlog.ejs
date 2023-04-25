@@ -1,16 +1,16 @@
 <%-include('../partials/_header.ejs')%>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-lg-2">
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-7 md-6 xs-6">
             <nav class="navbar navbar-light">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <img src="https://media.istockphoto.com/id/1313110704/vector/default-avatar-photo-placeholder-profile-icon.jpg?s=612x612&w=0&k=20&c=WbpeZFUeHvhwYEA07qEMqTU1Bsxc9O9ShlXYofbhqx0=" 
+                        <img src="<%=authorData.profile_photo%>" 
                         alt="" width="30" height="30" class="rounded-circle">
-                        &nbsp;&nbsp;&nbsp;<%=blogData.author_name%>
+                        &nbsp;&nbsp;&nbsp;<%=authorData.username%>
                     </div>
                     <div class="col">
                         <h6>
@@ -27,31 +27,36 @@
             <br/>
             <p style="width:90%"><%=blogData.content%></p>
         </div>
-        <div class="col-md-4">
-            <h1>Author Profile</h1>
-            <!-- Author Card -->
-            <div class="card author_profile" style="width: 80%">
-                <img src="https://media.istockphoto.com/id/1313110704/vector/default-avatar-photo-placeholder-profile-icon.jpg?s=612x612&w=0&k=20&c=WbpeZFUeHvhwYEA07qEMqTU1Bsxc9O9ShlXYofbhqx0="
+        <div class="container col-lg-3 col-md-4 col-xs-4">
+                <h1>Author Profile</h1>
+                <!-- Author Card -->
+                <div class="card author_profile" style="width: 80%">
+                <img src="<%=authorData.profile_photo%>"                        
                     class="card-img-top h-auto" style="width:100%" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title"><%=blogData.author_name%></h5>
-                  <p class="card-text">Number of Blogs Written: </p>
-                  <a href="#" class="btn btn-primary">Profile Page</a>
+                    <div class="card-body">
+                    <h5 class="card-title"><%=authorData.username%></h5>
+                    <p class="card-text">Number of Blogs Written: </p>
+                    <a href="/user/<%=authorData._id%>" class="btn btn-primary">Profile Page</a>
+                    </div>
                 </div>
-            </div>
-
-            <h1>Other Blogs</h1>
-            <!-- Hot Blogs -->
+                <div class="">
+                    <h1>Other Blogs</h1>
+                    <!-- Hot Blogs -->
+                </div>
         </div>
     </div>
     
     <!-- Show only when the User logged in is the author -->
-    <div class="editbar">
-        <button class="btn btn-primary">Edit</button>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-6 editbar ">
+            <button class="btn btn-primary">Edit</button>
+        </div>
         
     </div>
 </div>
-    
+<%=authorData.profile_photo%>
 
 <script >
     if (<%- JSON.stringify(author_id_cookie) %> !=  <%- JSON.stringify(blogData.author_id) %>){ // if both not equal then hide else show..
@@ -63,5 +68,4 @@
     }
 </script>
     
-
 <%-include('../partials/_footer.ejs')%>

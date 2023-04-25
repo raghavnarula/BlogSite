@@ -56,6 +56,9 @@ exports.blogDB_drop = (req,res)=>{
     .then((data)=>{
         res.send(data)
     })
+    .catch((err)=>{
+        res.send(err)
+    })
 }
 
 exports.deleteBlog = (req,res)=>{

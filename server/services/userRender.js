@@ -38,3 +38,16 @@ exports.loginRender = (req,res)=>{
     
     res.render('pages/login')
 }
+
+
+exports.userProfile = async (req,res)=>{
+    try{
+        const user_info = await axios.get(`http://localhost:${process.env.PORT}/api/user/find/${req.params.userid}`)
+
+        res.render('pages/userProfilePage',{userData:user_info.data})
+    }
+    catch{(err)=>{
+        res.send(err)
+    }}
+
+}
