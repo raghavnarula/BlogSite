@@ -106,3 +106,4 @@ exports.updateUser = (req,res)=>{
         res.send(err)
     }))
 }
+

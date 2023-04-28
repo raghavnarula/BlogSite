@@ -34,21 +34,16 @@ exports.allBlogs = (req,res)=>{
     }
 
 exports.findBlogsByAuthor = (req,res)=>{
-    const token = req.cookies.Token;
-    const verified = jwt.verify(token,process.env.secret_key)
 
-    if(verified){
-        blogDB.find({author_id:verified._id})
-        .then((data)=>{
-            res.json(data)
-        })
-        .catch((err)=>{
-            res.json(err)
-        })
-    }
-    else{
-        res.redirect('/login')
-    }
+    const userid= req.params.userid;
+    blogDB.find({author_id:userid})
+    .then((data)=>{
+        res.json(data)
+    })
+    .catch((err)=>{
+        res.json(err)
+    })
+    
 }
 
 exports.blogDB_drop = (req,res)=>{

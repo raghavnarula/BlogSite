@@ -7,7 +7,7 @@ route.get('/blog/:blogid',blogService.blogView)
 
 // API's
 route.post('/api/blog/create/',blogController.blogCreate)
-route.get('/api/blog/find-blogs-by-author/',blogController.findBlogsByAuthor)
+route.get('/api/blog/user-blogs/:userid',blogController.findBlogsByAuthor)
 route.delete('/api/blog/drop/',blogController.blogDB_drop)
 route.get('/api/blog/all/',blogController.allBlogs)
 route.get('/api/user/test/',blogController.test)
