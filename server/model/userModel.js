@@ -14,6 +14,7 @@ const UserSchema = mongoose.Schema({
         type:String,
         default:" ",
     },
+    date_joined:Date,
 })
 
 const User = mongoose.model('User',UserSchema)

@@ -22,7 +22,7 @@
             </nav>
             
             <h1><%=blogData.title%></h1>
-            <img class="img-fluid" style="height:auto; width:90%"src="https://thumbs.dreamstime.com/b/blog-information-website-concept-workplace-background-text-view-above-127465079.jpg">
+            <img class="img-fluid" style="height:auto; width:90%"src="<%=blogData.image%>">
             <br/>
             <br/>
             <p style="width:90%"><%=blogData.content%></p>
@@ -36,6 +36,9 @@
                     <div class="card-body">
                     <h5 class="card-title"><%=authorData.username%></h5>
                     <p class="card-text">Number of Blogs Written: </p>
+                    <blockquote class="blockquote">
+                        <p class="mb-0"><%=authorData.highlight%></p>
+                    </blockquote>
                     <a href="/user/<%=authorData._id%>" class="btn btn-primary">Profile Page</a>
                     </div>
                 </div>
@@ -51,7 +54,8 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-6 editbar ">
-            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-warning rounded-pill">Edit</button>
+            <button class="btn btn-danger rounded-pill">Delete</button>
         </div>
         
     </div>
@@ -67,5 +71,4 @@
         // $(".author_profile").hide()
     }
 </script>
-    
 <%-include('../partials/_footer.ejs')%>

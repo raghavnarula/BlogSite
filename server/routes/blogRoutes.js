@@ -4,6 +4,7 @@ const blogController = require('../controller/blogController')
 const blogService = require('../services/blogsRender')
 //Services
 route.get('/blog/:blogid',blogService.blogView)
+route.get('/blogs/create',blogService.blogCreate)
 
 // API's
 route.post('/api/blog/create/',blogController.blogCreate)

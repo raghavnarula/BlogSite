@@ -42,9 +42,9 @@ exports.loginRender = (req,res)=>{
 
 exports.userProfile = async (req,res)=>{
     try{
-        const user_info = await axios.get(`http://localhost:${process.env.PORT}/api/user/find/${req.params.userid}`)
+        const author_info = await axios.get(`http://localhost:${process.env.PORT}/api/user/find/${req.params.userid}`)
         const user_blogs = await axios.get(`http://localhost:${process.env.PORT}/api/blog/user-blogs/${req.params.userid}`)
-        res.render('pages/userProfilePage',{userData:user_info.data,userBlogs:user_blogs.data})
+        res.render('pages/userProfilePage',{authorData:author_info.data,userBlogs:user_blogs.data})
     }
     catch (err) {
         res.send(err)

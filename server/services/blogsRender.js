@@ -36,3 +36,7 @@ exports.blogView = async (req,res)=>{
 //         res.send(error)
 //     })
 // }
+
+exports.blogCreate = (req,res)=>{
+    res.render('pages/blogs/blogCreate')
+}
