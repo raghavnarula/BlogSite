@@ -2,7 +2,8 @@ const blogDB = require('../model/blogModel')
 const userDB = require('../model/userModel')
 const jwt = require('jsonwebtoken')
 
-exports.blogCreate = async (req,res)=>{
+exports.blogCreate = async (req,res) => {
+
     const user = jwt.verify(req.cookies.Token,process.env.secret_key)
     user_data = await userDB.findById(Object(user._id)).exec()
     author_name = user_data.username
@@ -16,7 +17,8 @@ exports.blogCreate = async (req,res)=>{
 
     blog.save()
     .then((data)=>{
-        res.json(data)
+        // res.json(data)
+        res.redirect('/')
     })
     .catch((err)=>{
         res.json(err)
@@ -43,7 +45,6 @@ exports.findBlogsByAuthor = (req,res)=>{
     .catch((err)=>{
         res.json(err)
     })
-    
 }
 
 exports.blogDB_drop = (req,res)=>{
@@ -54,6 +55,7 @@ exports.blogDB_drop = (req,res)=>{
     .catch((err)=>{
         res.send(err)
     })
+
 }
 
 exports.deleteBlog = (req,res)=>{
@@ -63,7 +65,6 @@ exports.deleteBlog = (req,res)=>{
 
 // exports.editBlog = (req,res)=>{
 //     const blog_id = req.body._id
-    
 //     blogDB.findOneAndUpdate({id:blog_id},{})
 // }
 
@@ -88,5 +89,3 @@ exports.deleteOneBlog = async (req,res)=>{
         res.send(error)
     }
 }
-
-// exports.
