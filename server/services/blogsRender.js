@@ -3,6 +3,9 @@ const blogDB = require('../model/blogModel')
 const axios = require('axios')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
+const multer = require("multer");
+const path = require("path");
+
 
 exports.blogView = async (req,res)=>{
 
