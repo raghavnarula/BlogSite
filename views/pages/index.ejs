@@ -7,18 +7,18 @@
             <% for(var i=0; i < data.length; i++) { %>
                 <div class="card">
                     <div class="row">
-                        <div class="col-md-5",>
+                        <div class="col-lg-5" >
                             <img
-                            style="height: auto;width:auto;",
+                            style="width: 100%;max-height:300px;height:100%",
                             class="rounded"
                             src="/img/updated/<%=data[i].image%>"/>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-lg-7 col-md-12">
                             <div class="card-body">
                                 <h5 class="card-title"><%=data[i].title%></h5>
                                 <p class="card-text"><%=data[i].content.substring(0,190)+"..."%></p>
                                 <p class="card-text">
-                                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    <small class="text-body-secondary"><strong>Last Updated: </strong><%=data[i].date_posted%></small>
                                 </p>
                                 <div class="row">
                                     <div class="col">

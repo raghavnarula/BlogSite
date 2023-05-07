@@ -1,4 +1,4 @@
-<%-include('../partials/_header.ejs')%>
+<%-include('../../partials/_header.ejs')%>
 <div class="container">
     <div class="row">
         <div class="col-lg-2">
@@ -22,7 +22,7 @@
             </nav>
             
             <h1><%=blogData.title%></h1>
-            <img class="img-fluid" style="height:auto; width:90%"src="<%=blogData.image%>">
+            <img class="img-fluid" style="height:auto; width:90%"src="/img/<%=blogData.image%>">
             <br/>
             <br/>
             <p style="width:90%"><%=blogData.content%></p>
@@ -54,13 +54,13 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-6 editbar ">
-            <button class="btn btn-warning rounded-pill">Edit</button>
-            <button class="btn btn-danger rounded-pill">Delete</button>
+            <a href="/blog/<%=blogData._id%>/edit" role="button" class="btn btn-warning rounded-pill">Edit</a>
+            <a role="button" class="btn btn-danger rounded-pill">Delete</a>
         </div>
         
     </div>
 </div>
-<%=authorData.profile_photo%>
+<!-- <%=authorData.profile_photo%> -->
 
 <script >
     if (<%- JSON.stringify(author_id_cookie) %> !=  <%- JSON.stringify(blogData.author_id) %>){ // if both not equal then hide else show..
@@ -71,4 +71,4 @@
         // $(".author_profile").hide()
     }
 </script>
-<%-include('../partials/_footer.ejs')%>
+<%-include('../../partials/_footer.ejs')%>

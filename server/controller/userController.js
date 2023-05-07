@@ -100,7 +100,7 @@ exports.login = async (req,res)=>{
 exports.updateUser = (req,res)=>{
     const userid = req.params.userid
     userDB.findByIdAndUpdate(Object(userid),req.body)
-    .then((dauserInfo)=>{
+    .then((userInfo)=>{
         res.json(userInfo)
     })
     .catch((err=>{

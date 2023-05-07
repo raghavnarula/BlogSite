@@ -1,4 +1,4 @@
-<div style="margin:3vh 0px 0%;">
+{/* <div style="margin:3vh 0px 0%;">
     <form action="/api/user/" method="POST">
         <div class="row mx-2">
             <div class="form-group col-lg-6">
@@ -72,3 +72,10 @@
         </div>
     </form>   
 </div>
+
+
+
+$('#form').submit(function(eventObj) {
+    $(this).append('<input type="hidden" name="field_name" value="value" /> ');
+    return true;
+}); */}

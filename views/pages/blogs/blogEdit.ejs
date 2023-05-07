@@ -1,5 +1,74 @@
-<%-include('../partials/_header.ejs')%>
-    <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
-    <input class="form-control" type="text" placeholder="Default input">
-    <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm">
-<%-include('../partials/_footer.ejs')%>
+<%-include('../../partials/_header.ejs')%>
+    <div style="margin:3vh 0px 0%;">
+        <form action="/api/blog/create/" enctype="multipart/form-data" method="POST">
+            <div class="form-group">
+                <div class="form-group col-lg-6 col-sm-8 mx-auto">
+                    <img src="/img/blogdefault.jpg" id="preview" class="rounded mx-auto d-block" style="height:300px;width:500px;margin:auto" alt="Please Add Image for Blog">
+                    <br>
+                    <input type="file" class="form-control-file" id="filetag" name="image">
+                </div>
+            </div>
+            <div class="row mx-2">
+                <div class="form-group col-lg-6 col-sm-8">
+                    <label for="title">Blog Name</label>
+                    <input placeholder="" type="text" name="title" required="true"  class="form-control">
+                </div>
+                <div class="form-group col-md-10">
+                    <label for="exampleFormControlTextarea1">Content</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-success rounded-pill mx-4" type="submit">Submit</button>
+        </form>
+    </div>
+
+<script>
+    var fileTag = document.getElementById("filetag"),
+    preview = document.getElementById("preview");
+        
+    fileTag.addEventListener("change", function() {
+    changeImage(this);
+    });
+
+    function changeImage(input) {
+        var reader;
+        if (input.files && input.files[0]) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log(e.target,e.target.result)
+                    preview.setAttribute('src', e.target.result); // Here image is in Base 64 format only..
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+    }
+</script>
+
+<script>
+    var MAX_WIDTH = 300;
+    var MAX_HEIGHT = 300;
+
+    var width = img.width;
+    var height = img.height;
+
+    // Change the resizing logic
+    if (width > height) {
+        if (width > MAX_WIDTH) {
+            height = height * (MAX_WIDTH / width);
+            width = MAX_WIDTH;
+        }
+    } else {
+        if (height > MAX_HEIGHT) {
+            width = width * (MAX_HEIGHT / height);
+            height = MAX_HEIGHT;
+        }
+    }
+
+    var canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+</script>
+
+<%-include('../../partials/_footer.ejs')%>
