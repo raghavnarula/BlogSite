@@ -1,0 +1,70 @@
+<%-include('../../partials/_header.ejs')%>
+
+<%-include('editForm.ejs')%>
+
+
+<div class="defaultview text-center">
+    <img src="<%=authorData.profile_photo%>" class="rounded mx-auto" id="preview" style="height:200px;width:200px; margin:0px 45%">
+    <div>
+        <h1 style="display:inline"><%=authorData.firstName%></h1> 
+        <h2 style="display:inline"><%=authorData.lastName%></h2>    
+    </div>
+
+    <blockquote class="blockquote">
+        <label
+        <p class="mb-0">Highlighted Text <%=authorData.highlight%></p>
+    </blockquote>
+    
+    <div>
+        <h4 style="display:inline">Date Joined: </h4>
+        <h5 style="display:inline"><%=authorData.date_joined%></h5>
+    </div> 
+    <button type="button" class="edit-btn btn btn-warning rounded-pill" onclick="showForm()">Edit</button>
+</div> 
+
+<%-include('../blogs/showAllBlogsByAuthor.ejs')%>
+
+
+<script>
+    var fileTag = document.getElementById("filetag"),
+    preview = document.getElementById("preview");
+        
+    fileTag.addEventListener("change", function() {
+    changeImage(this);
+    });
+
+    function changeImage(input) {
+
+        var reader;
+        if (input.files && input.files[0]) {
+
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    // console.log(e.target,e.target.result)
+                    preview.setAttribute('src', e.target.result); // Here image is in Base 64 format only..
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+    }
+</script>
+
+<script>
+    function normal(){
+        $(".defaultview").show()
+        $(".editForm").hide()
+    }
+    function showForm(){
+        $(".defaultview").hide()
+        $(".editForm").show()
+    }
+
+    if (<%- JSON.stringify(author_id_cookie) %> !=  <%- JSON.stringify(authorData._id) %>){ // if both not equal then hide else show..
+        $(".edit-btn").hide()
+    }
+    else{
+        $(".edit-btn").show()
+        // $(".author_profile").hide()
+    }
+</script>
+<%-include('../../partials/_footer.ejs')%>

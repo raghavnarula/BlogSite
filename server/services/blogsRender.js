@@ -28,10 +28,15 @@ exports.blogView = async (req,res)=>{
 }
 
 exports.editBlog = (req,res)=>{
-    res.send("pagal")
-    // res.render('pages/blogs/editBlog')
+    // res.send("pagal")
+    axios.get(`http://localhost:${process.env.PORT}/api/blog/${req.params.blogid}`)
+    .then((blogData)=>{
+        res.render('pages/blogs/editBlog',{blogData:blogData.data})
+    })
+    .catch((err)=>{
+        res.send(err)
+    })
 }
-
 
 exports.blogCreate = (req,res)=>{
     res.render('pages/blogs/blogCreate')

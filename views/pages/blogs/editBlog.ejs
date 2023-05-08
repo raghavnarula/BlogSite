@@ -1,21 +1,23 @@
 <%-include('../../partials/_header.ejs')%>
     <div style="margin:3vh 0px 0%;">
-        <form action="/api/blog/create/" enctype="multipart/form-data" method="POST">
+        <!-- <%=blogData._id%> -->
+        <form action="/api/blog/<%=blogData._id%>/edit/" enctype="multipart/form-data" method="POST">
             <div class="form-group">
                 <div class="form-group col-lg-6 col-sm-8 mx-auto">
-                    <img src="/img/blogdefault.jpg" id="preview" class="rounded mx-auto d-block" style="height:300px;width:500px;margin:auto" alt="Please Add Image for Blog">
+                    <!-- <%=blogData.image%> -->
+                    <img src="/img/<%=blogData.image%>" id="preview" class="rounded mx-auto d-block" style="max-height:400px;max-width:600px;" alt="Please Add Image for Blog">
                     <br>
-                    <input type="file" class="form-control-file" id="filetag" name="image" required>
+                    <input type="file" class="form-control-file" id="filetag" name="image">
                 </div>
             </div>
             <div class="row mx-2">
                 <div class="form-group col-lg-6 col-sm-8">
                     <label for="title">Blog Name</label>
-                    <input placeholder="" type="text" name="title" required="true"  class="form-control">
+                    <input placeholder="" type="text" name="title" required="true"  class="form-control" value="<%=blogData.title%>">
                 </div>
                 <div class="form-group col-md-10">
-                    <label for="exampleFormControlTextarea1">Content</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" rows="5" name="content"><%=blogData.content%></textarea>
                 </div>
             </div>
             <br>
@@ -36,7 +38,7 @@
         if (input.files && input.files[0]) {
                 reader = new FileReader();
                 reader.onload = function(e) {
-                    console.log(e.target,e.target.result)
+                    // console.log(e.target,e.target.result)
                     preview.setAttribute('src', e.target.result); // Here image is in Base 64 format only..
                 }
                 reader.readAsDataURL(input.files[0]);

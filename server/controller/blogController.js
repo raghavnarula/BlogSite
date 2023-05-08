@@ -50,8 +50,7 @@ exports.blogCreate = async (req,res) => {
 
 exports.editBlog = async (req,res)=>{
     const blogid = req.params.blogid
-    console.log(blogid)
-    console.log(req.file)
+
     // See if the User has sent any file or not..
     if (req.file != undefined){
         resizeImage(req.file.filename)
@@ -63,11 +62,9 @@ exports.editBlog = async (req,res)=>{
                 title:req.body.title,
                 content:req.body.content
             })
-            console.log("Updated")
-            res.send("updates")
+            res.redirect('/')
         }
         catch(err){
-            console.log(err)
             res.send(err)
         }
     }
@@ -81,11 +78,9 @@ exports.editBlog = async (req,res)=>{
                 title:req.body.title,
                 content:req.body.content
             })
-            console.log("Updated")
-            res.send("updates")
+            res.redirect('/')
         }
         catch(err){
-            console.log(err)
             res.send(err)
         }
         

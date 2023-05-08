@@ -1,32 +1,26 @@
-<%-include('../partials/_header.ejs')%>
-
-<form action="/user/edit/<%=userData.userid%>" method="PATCH"></form>
-<img src="<%=userData.profile_photo%>" id="preview" style="height:200px;width:200px ;margin:auto">
-<input type="file" id="filetag">
-
-<div class="container" style="border:1px solid black;border-radius:20px">
-    <h3>All Blogs By You</h3>
-    <% for(var i=0; i < userBlogs.length; i++) { %>
-    <div class="row" style="margin:0px 10%">
+<div class="container mt-5">
+    <h3 class="mb-5">All Blogs By <%=authorData.username%></h3>
+    <div class="row">
         <div class="col-md-9">
+            <% for(var i=0; i < userBlogs.length; i++) { %>
                 <div class="card">
                     <div class="row">
-                        <div class="col-md-5",>
+                        <div class="col-lg-5" >
                             <img
-                            style="height: 100%; width: 100%",
+                            style="width: 100%;max-height:300px;height:100%",
                             class="rounded"
-                            src="https://thumbs.dreamstime.com/b/blog-information-website-concept-workplace-background-text-view-above-127465079.jpg"/>
+                            src="/img/updated/<%=userBlogs[i].image%>"/>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-lg-7 col-md-12">
                             <div class="card-body">
                                 <h5 class="card-title"><%=userBlogs[i].title%></h5>
                                 <p class="card-text"><%=userBlogs[i].content.substring(0,190)+"..."%></p>
                                 <p class="card-text">
-                                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    <small class="text-body-secondary"><strong>Last Updated: </strong><%=userBlogs[i].date_posted%></small>
                                 </p>
                                 <div class="row">
                                     <div class="col">
-                                        <a href="/blog/<%=userBlogs[i]._id%>" class="btn btn-primary rounded-pill">Read More</a>
+                                        <a href="/blog/<%=userBlogs[i]._id%>" class="btn btn-primary">Read More</a>
                                     </div>
                                     <div class="col">
                                     </div>
@@ -59,48 +53,7 @@
                     </div>
                 </div>
                 <br>
-        </div>
-        <div class="col-md-3" style="">
-            <div class="card" style="border:none">
-                <div class="card-body mx-auto">
-                        <!-- <%=userBlogs[i]._id%> -->
-                    <a role="button" class="btn btn-warning mx-1 mb-auto rounded-pill px-3" href="/blog/edit/<%=userBlogs[i]._id%>">Edit</a>
-                    <a role="button" class="btn btn-danger mx-3 rounded-pill" href="/blog/delete/<%=userBlogs[i]._id%>">Delete</a>
-                </div>
-            </div>
-            <!-- Edit and Delete Options -->
-            
+            <% } %>
         </div>
     </div>
-    <%}%>
 </div>
-
-
-
-
-<script>
-    var fileTag = document.getElementById("filetag"),
-    preview = document.getElementById("preview");
-        
-    fileTag.addEventListener("change", function() {
-    changeImage(this);
-    });
-
-    function changeImage(input) {
-
-        var reader;
-        if (input.files && input.files[0]) {
-
-                reader = new FileReader();
-                reader.onload = function(e) {
-                    console.log(e.target,e.target.result)
-                    preview.setAttribute('src', e.target.result); // Here image is in Base 64 format only..
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-
-    }
-</script>
-
-
-<%-include('../partials/_footer.ejs')%>

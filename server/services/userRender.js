@@ -1,6 +1,7 @@
 const userDB = require('../model/userModel')
 const axios = require('axios')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
 
 exports.homeRoute = async (req,res)=>{
@@ -42,9 +43,14 @@ exports.loginRender = (req,res)=>{
 
 exports.userProfile = async (req,res)=>{
     try{
-        const author_info = await axios.get(`http://localhost:${process.env.PORT}/api/user/find/${req.params.userid}`)
-        const user_blogs = await axios.get(`http://localhost:${process.env.PORT}/api/blog/user-blogs/${req.params.userid}`)
-        res.render('pages/userProfilePage',{authorData:author_info.data,userBlogs:user_blogs.data})
+        const token = req.cookies.Token
+        const verified = jwt.verify(token,process.env.secret_key)
+        const [author_info, user_blogs] = await Promise.all([
+            await axios.get(`http://localhost:${process.env.PORT}/api/user/find/${req.params.userid}`),
+            await axios.get(`http://localhost:${process.env.PORT}/api/blog/user-blogs/${req.params.userid}`)
+          ]);
+        // console.log(author_info.data)
+        res.render('pages/users/userProfilePage',{authorData:author_info.data,userBlogs:user_blogs.data,author_id_cookie:verified._id})
     }
     catch (err) {
         res.send(err)

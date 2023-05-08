@@ -18,7 +18,7 @@ route.get('/api/blog/all/',blogController.allBlogs)
 route.get('/api/user/test/',blogController.test)
 route.get('/api/blog/:blogid',blogController.findBlog)
 
-route.patch('/api/blog/:blogid/edit/',blogmiddleware.upload.single("image"),blogController.editBlog)
+route.post('/api/blog/:blogid/edit/',blogmiddleware.upload.single("image"),blogController.editBlog)
 
 route.delete('/api/blog/drop/',blogController.blogDB_drop)
 route.delete('/api/blog/:blogid',blogController.deleteOneBlog)

@@ -1,33 +1,21 @@
 <%-include('../partials/_header.ejs')%>
-<div class="text-center">
-    <img src="<%=authorData.profile_photo%>" class="rounded mx-auto" id="preview" style="height:200px;width:200px; margin:0px 45%">
-    <div>
-        <h1 style="display:inline"><%=authorData.firstName%></h1> 
-        <h2 style="display:inline">Narula</h2>
-    </div>
-    <blockquote class="blockquote">
-        <p class="mb-0"><%=authorData.highlight%></p>
-    </blockquote>
 
-    <div>
-        <h4 style="display:inline">Date Joined: </h4>
-        <h5 style="display:inline"><%=authorData.date_joined%></h5>
-    </div>
-</div>
+<form action="/user/edit/<%=userData.userid%>" method="PATCH"></form>
+<img src="<%=userData.profile_photo%>" id="preview" style="height:200px;width:200px ;margin:auto">
+<input type="file" id="filetag">
 
-
-<div class="container">
-    <h3>All Blogs By <%=authorData.username%></h3>
+<div class="container" style="border:1px solid black;border-radius:20px">
+    <h3>All Blogs By You</h3>
     <% for(var i=0; i < userBlogs.length; i++) { %>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row" style="margin:0px 10%">
+        <div class="col-md-9">
                 <div class="card">
                     <div class="row">
                         <div class="col-md-5",>
                             <img
                             style="height: 100%; width: 100%",
                             class="rounded"
-                            src="<%=userBlogs[i].image%>"/>
+                            src="https://thumbs.dreamstime.com/b/blog-information-website-concept-workplace-background-text-view-above-127465079.jpg"/>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body">
@@ -72,17 +60,22 @@
                 </div>
                 <br>
         </div>
-        <!-- <div class="col-md-3" style="">
+        <div class="col-md-3" style="">
             <div class="card" style="border:none">
                 <div class="card-body mx-auto">
+                        <!-- <%=userBlogs[i]._id%> -->
                     <a role="button" class="btn btn-warning mx-1 mb-auto rounded-pill px-3" href="/blog/edit/<%=userBlogs[i]._id%>">Edit</a>
                     <a role="button" class="btn btn-danger mx-3 rounded-pill" href="/blog/delete/<%=userBlogs[i]._id%>">Delete</a>
                 </div>
-            </div>            
+            </div>
+            <!-- Edit and Delete Options -->
+            
         </div>
-    </div> -->
+    </div>
     <%}%>
 </div>
+
+
 
 
 <script>
@@ -100,7 +93,7 @@
 
                 reader = new FileReader();
                 reader.onload = function(e) {
-                    console.log(e.target,e.target.result)
+                    // console.log(e.target,e.target.result)
                     preview.setAttribute('src', e.target.result); // Here image is in Base 64 format only..
                 }
                 reader.readAsDataURL(input.files[0]);

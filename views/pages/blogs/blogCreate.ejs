@@ -36,7 +36,7 @@
         if (input.files && input.files[0]) {
                 reader = new FileReader();
                 reader.onload = function(e) {
-                    console.log(e.target,e.target.result)
+                    // console.log(e.target,e.target.result)
                     preview.setAttribute('src', e.target.result); // Here image is in Base 64 format only..
                 }
                 reader.readAsDataURL(input.files[0]);
