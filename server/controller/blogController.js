@@ -7,18 +7,17 @@ const moment = require('moment')
 
 async function resizeImage(image_name) {
     try {
-    await sharp(`assets/img/${image_name}`)
+    await sharp(`assets/img/blogs/${image_name}`)
         .resize({
           width: null,
           height: 250
         })
-        .toFile(`assets/img/updated/${image_name}`);
-        fs.unlink(`assets/img/${image_name}`)
+        .toFile(`assets/img/blogUpdated/${image_name}`);
+        // fs.unlink(`assets/img/${image_name}`)
     } catch (error) {
       console.log(error);
 }
 }
-
 
 exports.blogCreate = async (req,res) => {
 

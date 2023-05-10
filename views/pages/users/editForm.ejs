@@ -1,7 +1,7 @@
 <form action="/api/user/edit/<%=author_id_cookie%>" class="editForm" enctype="multipart/form-data" method="POST" style="display: none;">
     <div class="" style="margin-left:5%">
-        <img src="<%=authorData.profile_photo%>" class="rounded mx-auto" id="preview" style="height:200px;width:200px; margin:0px 45%">
-        <input type="file" class="edit form-control-file" id="filetag" name="image">
+        <img src="/img/users/<%=authorData.profile_photo%>" class="rounded mx-auto" id="preview" style="height:200px;width:200px; margin:0px 45%;">
+        <input type="file" class="edit form-control-file" id="filetag" name="profile_photo">
         <div class="">
             <h1 style="display:inline"><%=authorData.firstName%></h1> 
             <h2 style="display:inline"><%=authorData.lastName%></h2>
@@ -10,28 +10,28 @@
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">User Name</label>
                     <div class="col-sm-10">
-                        <input value="<%=authorData.username%>" placeholder="" type="text" name="title" required="true"  class="form-control">
+                        <input value="<%=authorData.username%>" placeholder="" type="text" name="username" required="true"  class="form-control">
                     </div>
                 </div> 
 
                 <div class="form-group row">
                     <label for="firstName" class="col-form-label col-sm-2">First Name</label>
                     <div class="col-sm-10">
-                        <input value="<%=authorData.firstName%>" placeholder="" type="text" name="firstName" required="true"  class="form-control">
+                        <input value="<%=authorData.firstName%>" placeholder="" type="text" name="firstName" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="lastName" class="col-form-label col-sm-2">Last Name</label>
                     <div class="col-sm-10">
-                        <input value="<%=authorData.lastName%>" placeholder="" type="text" name="lastName" required="true"  class="form-control">
+                        <input value="<%=authorData.lastName%>" placeholder="" type="text" name="lastName" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="highlight" class="col-form-label col-sm-2">Highlight</label>
                     <div class="col-sm-10">
-                        <input value="<%=authorData.highlight%>" placeholder="" type="text" name="highlight required="true"  class="form-control">
+                        <input value="<%=authorData.highlight%>" placeholder="" type="text" name="highlight"  class="form-control">
                     </div>
                 </div>
                 

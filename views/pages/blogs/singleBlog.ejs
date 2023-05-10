@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <img src="<%=authorData.profile_photo%>" 
+                        <img src="/img/users/<%=authorData.profile_photo%>" 
                         alt="" width="30" height="30" class="rounded-circle">
                         &nbsp;&nbsp;&nbsp;<%=authorData.username%>
                     </div>
@@ -22,7 +22,7 @@
             </nav>
             
             <h1><%=blogData.title%></h1>
-            <img class="img-fluid" style="height:auto; width:90%"src="/img/<%=blogData.image%>">
+            <img class="img-fluid" style="height:auto; width:90%"src="/img/blogs/<%=blogData.image%>">
             <br/>
             <br/>
             <p style="width:90%"><%=blogData.content%></p>
@@ -31,7 +31,7 @@
                 <h1>Author Profile</h1>
                 <!-- Author Card -->
                 <div class="card author_profile" style="width: 80%">
-                <img src="<%=authorData.profile_photo%>"                        
+                <img src="/img/users/<%=authorData.profile_photo%>"                        
                     class="card-img-top h-auto" style="width:100%" alt="...">
                     <div class="card-body">
                     <h5 class="card-title"><%=authorData.username%></h5>
@@ -60,7 +60,6 @@
         
     </div>
 </div>
-<!-- <%=authorData.profile_photo%> -->
 
 <script >
     if (<%- JSON.stringify(author_id_cookie) %> !=  <%- JSON.stringify(blogData.author_id) %>){ // if both not equal then hide else show..

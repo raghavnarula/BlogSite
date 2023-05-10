@@ -8,7 +8,7 @@ const UserSchema = mongoose.Schema({
     password:String,
     profile_photo:{
         type:String,
-        default:'/img/blogdefault.jpg'
+        default:'userDefault.png'
     },
     highlight:{
         type:String,

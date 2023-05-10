@@ -3,6 +3,21 @@ var userDB = require('../model/userModel');
 const jwt = require('jsonwebtoken')
 // const cookie = require('cookie-parser')
 
+
+async function resizeImage(image_name) {
+    try {
+    await sharp(`assets/img/users/${image_name}`)
+        .resize({
+          width: 200,
+          height: 200
+        })
+        .toFile(`assets/img/usersUpdated/${image_name}`);
+    } catch (error) {
+      console.log(error);
+}
+}
+
+
 exports.create = (req,res)=>{
     const user = new userDB({
         firstName:req.body.firstName,
@@ -98,13 +113,34 @@ exports.login = async (req,res)=>{
 }
 
 exports.updateUser = (req,res)=>{
+    // console.log(req.file.filename)
     const userid = req.params.userid
-    userDB.findByIdAndUpdate(Object(userid),req.body)
-    .then((userInfo)=>{
-        res.json(userInfo)
-    })
-    .catch((err=>{
-        res.send(err)
-    }))
+
+    if (req.file == undefined){
+
+        userDB.findByIdAndUpdate(Object(userid),req.body)
+        .then((userInfo)=>{
+            res.redirect(`/user/${req.params.userid}`)
+        })
+        .catch((err=>{
+            res.send(err)
+        }))
+    }
+    else{
+        userDB.findByIdAndUpdate(Object(userid),{
+            profile_photo:req.file.filename,
+            username:req.body.username,
+            firstName:req.body.firstName,
+            lastName:req.body.lastName,
+            highlight:req.body.highlight
+        }).then((userData)=>{
+            console.log(userData)
+            res.redirect(`/user/${req.params.userid}`)
+        })
+        .catch((err)=>{
+            res.send(err)
+        })
+    }
+    
 }
 
