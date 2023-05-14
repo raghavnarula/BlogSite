@@ -11,17 +11,21 @@ exports.homeRoute = async (req,res)=>{
     }
     else{
         // Query request
-        axios.get(`http://localhost:${process.env.PORT}/api/blog/all`)
-        .then((response)=>{
-            // console.log(response.data)
-            author_list = []
+        const token = req.cookies.Token
+        const verified = jwt.verify(token,process.env.secret_key)
 
-            res.render("pages/index",{data:response.data})
-            // res.send("Page")
-        })
-        .catch((error)=>{
-            res.send(error)
-        })
+        try{
+            const [request1, request2] = await Promise.all([
+                axios.get(`http://localhost:${process.env.PORT}/api/blog/all`),
+                axios.get(`http://localhost:${process.env.PORT}/api/user/find/${verified._id}`)
+            ]);
+            res.render("pages/index",{data:request1.data,user:request2.data})
+            // res.render('pages/index',{data:request1.data})
+            console.log(request2.data)
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 }
 
@@ -36,8 +40,7 @@ exports.user = (req,res)=>{
 }
 
 exports.loginRender = (req,res)=>{
-    
-    res.render('pages/login')
+        res.render('pages/login')
 }
 
 
@@ -50,7 +53,10 @@ exports.userProfile = async (req,res)=>{
             await axios.get(`http://localhost:${process.env.PORT}/api/blog/user-blogs/${req.params.userid}`)
           ]);
         // console.log(author_info.data)
-        res.render('pages/users/userProfilePage',{authorData:author_info.data,userBlogs:user_blogs.data,author_id_cookie:verified._id})
+        res.render('pages/users/userProfilePage',{authorData:author_info.data,
+                                                userBlogs:user_blogs.data,
+                                                author_id_cookie:verified._id,
+                                                user:author_info.data})
     }
     catch (err) {
         res.send(err)

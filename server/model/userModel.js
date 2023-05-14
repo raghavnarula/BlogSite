@@ -15,6 +15,9 @@ const UserSchema = mongoose.Schema({
         default:" ",
     },
     date_joined:Date,
+    savedPosts: [{
+        type: String
+    }]
 })
 
 const User = mongoose.model('User',UserSchema)

@@ -140,9 +140,28 @@ exports.findBlog = async (req,res)=>{
 exports.deleteOneBlog = async (req,res)=>{
     try{
         data = await blogDB.deleteOne({_id: Object(req.params.blogid)}).exec()
-        res.json(data) // redirect to home
+        // res.json(data) // redirect to home
+        res.redirect('/')
     }
     catch (error) {
         res.send(error)
+    }
+}
+
+exports.saveBlog = async (req,res)=>{
+    const Token = req.cookies.Token;
+    const user = jwt.verify(req.cookies.Token,process.env.secret_key)
+    try{
+
+        userDB.findByIdAndUpdate( Object(user._id),{ $push:{savedPosts:req.params.blogid} })
+        .then((user)=>{
+            res.send(user)
+        })
+        .catch((err)=>{
+            res.send(err)
+        })
+    }
+    catch(err){
+        res.send(err)
     }
 }

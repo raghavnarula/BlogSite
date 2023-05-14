@@ -32,7 +32,7 @@
                 <!-- Author Card -->
                 <div class="card author_profile" style="width: 80%">
                 <img src="/img/users/<%=authorData.profile_photo%>"                        
-                    class="card-img-top h-auto" style="width:100%" alt="...">
+                    class="card-img-top h-auto" class="ml-5"style="width:100%;" alt="...">
                     <div class="card-body">
                     <h5 class="card-title"><%=authorData.username%></h5>
                     <p class="card-text">Number of Blogs Written: </p>
@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-6 editbar ">
             <a href="/blog/<%=blogData._id%>/edit" role="button" class="btn btn-warning rounded-pill">Edit</a>
-            <a role="button" class="btn btn-danger rounded-pill">Delete</a>
+            <a role="button" class="btn btn-danger rounded-pill" href="/api/blog/delete/<%=blogData._id%>">Delete</a>
         </div>
         
     </div>

@@ -17,11 +17,11 @@ route.get('/api/blog/user-blogs/:userid',blogController.findBlogsByAuthor)
 route.get('/api/blog/all/',blogController.allBlogs)
 route.get('/api/user/test/',blogController.test)
 route.get('/api/blog/:blogid',blogController.findBlog)
-
+route.post('/api/blog/:blogid/save',blogController.saveBlog)
 route.post('/api/blog/:blogid/edit/',blogmiddleware.upload.single("image"),blogController.editBlog)
 
 route.delete('/api/blog/drop/',blogController.blogDB_drop)
-route.delete('/api/blog/:blogid',blogController.deleteOneBlog)
+route.get('/api/blog/delete/:blogid',blogController.deleteOneBlog)
 
 // exports
 module.exports = route;

@@ -2,7 +2,7 @@
 var userDB = require('../model/userModel');
 const jwt = require('jsonwebtoken')
 // const cookie = require('cookie-parser')
-
+const sharp = require('sharp')
 
 async function resizeImage(image_name) {
     try {
@@ -127,6 +127,7 @@ exports.updateUser = (req,res)=>{
         }))
     }
     else{
+        resizeImage(req.file.filename)
         userDB.findByIdAndUpdate(Object(userid),{
             profile_photo:req.file.filename,
             username:req.body.username,

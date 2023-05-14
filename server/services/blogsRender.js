@@ -18,7 +18,8 @@ exports.blogView = async (req,res)=>{
         .then((authorDataResponse)=>{
             res.render("pages/blogs/singleBlog",{blogData:blogDataResponse.data,
                                             author_id_cookie:verified._id,
-                                            authorData:authorDataResponse.data})
+                                            authorData:authorDataResponse.data,
+                                            user:authorDataResponse.data})
         })
         // res.send("Page")
     })
@@ -39,5 +40,14 @@ exports.editBlog = (req,res)=>{
 }
 
 exports.blogCreate = (req,res)=>{
-    res.render('pages/blogs/blogCreate')
+    const token = req.cookies.Token
+    const verified = jwt.verify(token,process.env.secret_key)
+
+    axios.get(`http://localhost:${process.env.PORT}/api/user/find/${verified._id}`)
+    .then((userData)=>{
+        res.render('pages/blogs/blogCreate',{user:userData.data})
+    })
+    .catch((err)=>{
+        res.send(err)
+    })
 }

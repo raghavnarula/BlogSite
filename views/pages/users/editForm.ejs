@@ -1,6 +1,6 @@
 <form action="/api/user/edit/<%=author_id_cookie%>" class="editForm" enctype="multipart/form-data" method="POST" style="display: none;">
     <div class="" style="margin-left:5%">
-        <img src="/img/users/<%=authorData.profile_photo%>" class="rounded mx-auto" id="preview" style="height:200px;width:200px; margin:0px 45%;">
+        <img src="/img/users/<%=authorData.profile_photo%>" class="mx-auto" id="preview" style="height:200px;width:200px; margin:0px 45%; border-radius: 50%;">
         <input type="file" class="edit form-control-file" id="filetag" name="profile_photo">
         <div class="">
             <h1 style="display:inline"><%=authorData.firstName%></h1> 
