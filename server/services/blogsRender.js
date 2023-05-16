@@ -29,10 +29,16 @@ exports.blogView = async (req,res)=>{
 }
 
 exports.editBlog = (req,res)=>{
-    // res.send("pagal")
+
     axios.get(`http://localhost:${process.env.PORT}/api/blog/${req.params.blogid}`)
     .then((blogData)=>{
-        res.render('pages/blogs/editBlog',{blogData:blogData.data})
+        axios.get(`http://localhost:${process.env.PORT}/api/user/find/${blogData.data.author_id}`)
+        .then((userData)=>{
+            res.render('pages/blogs/editBlog',{blogData:blogData.data,user:userData.data})
+        })
+        .catch((err)=>{
+            res.send(err)
+        })
     })
     .catch((err)=>{
         res.send(err)

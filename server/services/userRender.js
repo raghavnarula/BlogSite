@@ -39,10 +39,6 @@ exports.user = (req,res)=>{
     })   
 }
 
-exports.loginRender = (req,res)=>{
-        res.render('pages/login')
-}
-
 
 exports.userProfile = async (req,res)=>{
     try{

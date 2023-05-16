@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Blogger </title>
+
+
+<title>blue sign up - Bootdey.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
-body{
-    background-image: -webkit-gradient(linear, left top, right top, from(#4e63d7), to(#76bfe9)) !important;
+    	body{
+background-image: -webkit-gradient(linear, left top, right top, from(#4e63d7), to(#76bfe9)) !important;
     background-image: linear-gradient(to right, #4e63d7 0%, #76bfe9 100%) !important;
     margin-top:20px;}
 
@@ -137,7 +139,9 @@ body{
 }
 
 
-
+h3 {
+    font-size: 35px;
+}
 
 
 
@@ -160,54 +164,55 @@ body{
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-    
-    
-    
+    </style>
 
-</style>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
 <div class="container">
 <div class="row">
 <div class="col-md-11 mt-60 mx-md-auto">
-<div class="login-box bg-white pl-lg-5 pl-0">
+<div class="login-box bg-white pr-lg-5 pr-0">
 <div class="row no-gutters align-items-center">
-<div class="col-md-6">
+<div class="col-md-6 order-md-last">
 <div class="form-wrap bg-white">
-<h4 class="btm-sep pb-3 mb-5">Login</h4>
-<form class="form" method="POST" action="/api/user/login">
-    <div class="row">
-    <div class="col-12">
-    <div class="form-group position-relative">
-    <span class="zmdi zmdi-account"></span>
-        <input placeholder="username" type="text" name="username" required="true" class="form-control">
-    </div>
-    </div>
-    <div class="col-12">
-    <div class="form-group position-relative">
-    <span class="zmdi zmdi-email"></span>
-        <input required="true"  id="password" placeholder= "password" class="form-control" name="password" type="password">
-    </div>
-    </div>
-    <div class="col-12 text-lg-right">
-    <a href="#" class="c-black">Forgot password ?</a>
-    </div>
-    <div class="col-12 mt-30">
-    <button type="submit" id="submit" class="btn btn-lg btn-custom btn-dark btn-block">Sign In
-    </button>
-    </div>
-    </div>
+<h4 class="btm-sep pb-3 mb-5">Register</h4>
+<form class="form" method="post" action="/api/user/create/">
+<div class="row">
+<div class="col-12">
+<div class="form-group position-relative">
+<span class="zmdi zmdi-account"></span>
+<input type="text" id="username" class="form-control" placeholder="Username" name="username">
+</div>
+</div>
+<div class="col-12">
+<div class="form-group position-relative">
+<span class="zmdi zmdi-email"></span>
+<input type="email" id="email" class="form-control" placeholder="Email Address" name="email">
+</div>
+</div>
+<div class="col-12">
+<div class="form-group position-relative">
+<span class="zmdi zmdi-lock"></span>
+<input type="password" id="password" class="form-control" placeholder="Password" name="password">
+</div>
+</div>
+<div class="col-12">
+<button type="submit" id="submit" class="btn btn-lg btn-custom btn-dark btn-block">
+Sign Up
+</button>
+</div>
+</div>
 </form>
 </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-6 order-md-first">
 <div class="content text-center">
 <div class="border-bottom pb-5 mb-5">
-<h3 class="c-black">First time here?</h3>
-<a href="/signup" class="btn btn-custom">Sign up</a>
+<h3 class="c-black">Already have an account?</h3>
+<a href="/login" class="btn btn-custom">Sign In</a>
 </div>
-<h5 class="c-black mb-4 mt-n1">Or Sign In With</h5>
+<h5 class="c-black mb-4 mt-n1">Or Sign Up With</h5>
 <div class="socials">
 <a href="#" class="zmdi zmdi-facebook"></a>
 <a href="#" class="zmdi zmdi-twitter"></a>
@@ -221,5 +226,10 @@ body{
 </div>
 </div>
 </div>
-
-<%-include('../partials/_footer.ejs')%>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>

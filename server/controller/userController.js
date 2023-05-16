@@ -1,7 +1,7 @@
 // We store all the DB operation here
 var userDB = require('../model/userModel');
 const jwt = require('jsonwebtoken')
-// const cookie = require('cookie-parser')
+const cookie = require('cookie-parser')
 const sharp = require('sharp')
 
 async function resizeImage(image_name) {
@@ -27,11 +27,9 @@ exports.create = (req,res)=>{
         password:req.body.password,
         date_joined:Date.now(),
     })
-
     user.save()
         .then(data=>{
-            // console.log(data)
-            res.json(data)
+            res.redirect('/login')
         })
         .catch((err)=>{
             // console.log(err)
@@ -97,19 +95,20 @@ exports.cookieRead = (req,res,next) =>{
 }
 
 exports.login = async (req,res)=>{
-    const{username,password} = req.body
 
-    // If record found in DB
-    const user = await userDB.findOne({username:username}).exec()
-    if (user){
+      const { username, password } = req.body;
+      // If record found in DB
+      const user = await userDB.findOne({ username: username }).exec();
+      if (user) {
         // console.log(user)
-        token = jwt.sign({_id:user._id},process.env.secret_key,{expiresIn:'15d'})
-        res.cookie("Token",token)
-        res.redirect('/')
-    }
-    else{
-        res.redirect('/login')
-    }
+        token = jwt.sign({ _id: user._id }, process.env.secret_key, {
+          expiresIn: "15d",
+        });
+        res.cookie("Token", token);
+        res.redirect("/");
+      } else {
+        res.redirect("/login");
+      }
 }
 
 exports.updateUser = (req,res)=>{
@@ -145,3 +144,7 @@ exports.updateUser = (req,res)=>{
     
 }
 
+exports.logout = (req,res) =>{
+    res.clearCookie('Token')
+    res.redirect('/login')
+}
