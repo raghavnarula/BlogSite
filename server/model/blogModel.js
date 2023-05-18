@@ -6,6 +6,10 @@ const BlogSchema = mongoose.Schema({
     content:String,
     date_posted:String,
     image:String,
+    likes:{
+        default:0,
+        type:Number
+    }
     
 })
 

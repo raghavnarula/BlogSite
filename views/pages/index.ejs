@@ -4,7 +4,6 @@
 <style>
     .upvoted{
         background-color:#FF3B3F;
-        z-index:100;
     }
 .likeButton{
     border-color: #000000;
@@ -31,7 +30,36 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    z-index:10;
+}
+
+.downvoted{
+        background-color:#FF3B3F;
+    }
+.alreadyLikedButton{
+    border-color: #000000;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
 </style>
 
@@ -62,7 +90,13 @@
                                     </div>
                                     <div class="col">
                                         <!-- Like Button -->
-                                        <button class="likeButton upVote" onclick="colorChanger(window.getComputedStyle(this).background)">upVote</button>
+                                        <%if (user.savedPosts.includes(data[i]._id)) {%>
+                                            <button class="alreadyLikedButton downvote" onclick="colorChanger(window.getComputedStyle(this).background,'<%=data[i]._id%>')">upVote</button>
+
+                                        <% } else {%>
+                                            <button> white</button>
+                                            <%}%>
+                                        <button class="likeButton upVote" onclick="colorChanger(window.getComputedStyle(this).background,'<%=data[i]._id%>')">upVote</button>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +114,6 @@
 
 
 <script>
-    
 
 </script>
 

@@ -20,8 +20,6 @@ exports.homeRoute = async (req,res)=>{
                 axios.get(`http://localhost:${process.env.PORT}/api/user/find/${verified._id}`)
             ]);
             res.render("pages/index",{data:request1.data,user:request2.data})
-            // res.render('pages/index',{data:request1.data})
-            console.log(request2.data)
         }
         catch(err){
             console.log(err)

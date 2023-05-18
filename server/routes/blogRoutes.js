@@ -17,8 +17,11 @@ route.get('/api/blog/user-blogs/:userid',blogController.findBlogsByAuthor)
 route.get('/api/blog/all/',blogController.allBlogs)
 route.get('/api/user/test/',blogController.test)
 route.get('/api/blog/:blogid',blogController.findBlog)
-route.post('/api/blog/:blogid/save',blogController.saveBlog)
 route.post('/api/blog/:blogid/edit/',blogmiddleware.upload.single("image"),blogController.editBlog)
+route.post('/api/blog/:blogid/voting/',blogController.upvoteDownvote)
+
+route.patch('/api/blog/:blogid/save',blogController.saveBlog)
+route.patch('/api/blog/:blogid/unsave',blogController.unsaveBlog)
 
 route.delete('/api/blog/drop/',blogController.blogDB_drop)
 route.get('/api/blog/delete/:blogid',blogController.deleteOneBlog)

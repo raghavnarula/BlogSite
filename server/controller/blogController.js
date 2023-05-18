@@ -153,13 +153,37 @@ exports.saveBlog = async (req,res)=>{
     const user = jwt.verify(req.cookies.Token,process.env.secret_key)
     try{
 
-        userDB.findByIdAndUpdate( Object(user._id),{ $push:{savedPosts:req.params.blogid} })
-        .then((user)=>{
-            res.send(user)
-        })
-        .catch((err)=>{
-            res.send(err)
-        })
+        const userData = await userDB.findByIdAndUpdate( Object(user._id),{ $push:{savedPosts:req.params.blogid} },{new:true})
+        res.send(userData)
+    }
+    catch(err){
+        res.send(err)
+    }
+}
+
+exports.unsaveBlog = async (req,res)=>{
+    const Token = req.cookies.Token;
+    const user = jwt.verify(req.cookies.Token,process.env.secret_key)
+    try{
+        const userData = await userDB.findByIdAndUpdate( Object(user._id),{ $pull:{savedPosts:req.params.blogid} },{new:true})
+        res.send(userData)
+    }
+    catch(err){
+        res.send(err)
+    } 
+}
+
+
+exports.upvoteDownvote = async (req,res)=>{
+    // see which user upvoted also update the total count for each blog
+    const Token = req.cookies.Token;
+    const user = jwt.verify(req.cookies.Token,process.env.secret_key)
+
+    try{
+        const upvote = req.body.upvote
+        const downvote = req.body.downvote
+        const result = await blogDB.findByIdAndUpdate(Object(req.params.blogid),{$inc:{likes:upvote+downvote}},{new:true}).exec()
+        res.send(result)
     }
     catch(err){
         res.send(err)
