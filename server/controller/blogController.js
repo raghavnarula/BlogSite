@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const sharp = require('sharp')
 const fs = require('fs')
 const moment = require('moment')
+const { all } = require('axios')
 
 async function resizeImage(image_name) {
     try {
@@ -35,6 +36,7 @@ exports.blogCreate = async (req,res) => {
         date_posted:moment().format('MMMM Do YYYY, h:mm:ss a'),
         author_name: author_name,
         image:req.file.filename,
+        likes:req.body.likes,
     })
 
     blog.save()
@@ -152,22 +154,25 @@ exports.saveBlog = async (req,res)=>{
     const Token = req.cookies.Token;
     const user = jwt.verify(req.cookies.Token,process.env.secret_key)
     try{
-
         const userData = await userDB.findByIdAndUpdate( Object(user._id),{ $push:{savedPosts:req.params.blogid} },{new:true})
+        // res.redirect(req.get('referer'));
         res.send(userData)
     }
     catch(err){
         res.send(err)
     }
+
 }
 
 exports.unsaveBlog = async (req,res)=>{
     const Token = req.cookies.Token;
     const user = jwt.verify(req.cookies.Token,process.env.secret_key)
     try{
-        const userData = await userDB.findByIdAndUpdate( Object(user._id),{ $pull:{savedPosts:req.params.blogid} },{new:true})
+        const userData = await userDB.findByIdAndUpdate(Object(user._id),{ $pull:{savedPosts:req.params.blogid} },{new:true})
         res.send(userData)
+        // res.redirect(req.get('referer'));
     }
+
     catch(err){
         res.send(err)
     } 
@@ -183,9 +188,43 @@ exports.upvoteDownvote = async (req,res)=>{
         const upvote = req.body.upvote
         const downvote = req.body.downvote
         const result = await blogDB.findByIdAndUpdate(Object(req.params.blogid),{$inc:{likes:upvote+downvote}},{new:true}).exec()
+        // res.redirect(req.get('referer'));
         res.send(result)
     }
     catch(err){
         res.send(err)
     }
+}
+
+exports.savedPostsOfUser = async (req,res) => {
+    const Token = req.cookies.Token;
+    const userID = jwt.verify(req.cookies.Token,process.env.secret_key)
+    const user = await userDB.findById(Object(userID._id))
+    const blogs = await blogDB.find().where('_id').in(user.savedPosts).exec()
+    res.json(blogs)
+}
+
+
+exports.hotBlogs = async (req,res)=>{
+    const num = 5 // number of hot blogs to display
+    // we have to sort all blogs based on the likes.. and select the top num blogs
+    const dataArray = new Array()
+    const allBlogs = await blogDB.find({})
+    for (let i = 0;i < Number(Object.keys(allBlogs).length);i++){
+        // console.log(allBlogs[i]._id)
+        const data = {}
+        data["id"] = allBlogs[i]._id
+        data["likes"] = (allBlogs[i].likes)
+        dataArray.push(data)
+    }
+
+    const data = dataArray.sort((a, b) => {
+        if (a.likes > b.likes) {
+          return -1;
+        }
+      });
+      
+    res.json(data.slice(0,5))
+
+    
 }

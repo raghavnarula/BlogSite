@@ -1,0 +1,56 @@
+<%-include('../../partials/_header.ejs')%>
+<!-- All the blogs  -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <% for(var i=0; i < data.length; i++) { %>
+                <div class="card">
+                    <div class="row">
+                        <div class="col-lg-5" >
+                            <img
+                            style="width: 100%;max-height:300px;height:100%",
+                            class="rounded"
+                            src="/img/blogUpdated/<%=data[i].image%>"/>
+                        </div>
+                        <div class="col-lg-7 col-md-12">
+                            <div class="card-body">
+                                <h5 class="card-title"><%=data[i].title%></h5>
+                                <p class="card-text"><%=data[i].content.substring(0,190)+"..."%></p>
+                                <p class="card-text">
+                                    <small class="text-body-secondary"><strong>Last Updated: </strong><%=data[i].date_posted%></small>
+                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="/blog/<%=data[i]._id%>" class="btn btn-primary">Read More</a>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                    <div class="col">
+                                        <button onclick="removeSaved('<%=data[i]._id%>')">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            <% } %>
+        </div>
+        <div class="col-md-3">
+            <!-- Hot Blogs -->
+        </div>
+    </div>
+</div>
+
+<script>
+    async function removeSaved(id){
+        await axios.post(`http://localhost:9001/api/blog/${id}/voting`,{"downvote":-1,"upvote":0})
+        await axios.patch(`http://localhost:9001/api/blog/${id}/unsave`)
+        location.reload()
+    }
+
+</script>
+
+<%-include('../../partials/_footer.ejs')%>

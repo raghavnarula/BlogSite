@@ -8,7 +8,7 @@ const BlogSchema = mongoose.Schema({
     image:String,
     likes:{
         default:0,
-        type:Number
+        type: Number
     }
     
 })

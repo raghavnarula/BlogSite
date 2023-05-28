@@ -57,3 +57,18 @@ exports.blogCreate = (req,res)=>{
         res.send(err)
     })
 }
+
+exports.savedBlogs = async (req,res) => {
+
+    const Token = req.cookies.Token;
+    const userID = jwt.verify(req.cookies.Token,process.env.secret_key)
+    const user = await userDB.findById(Object(userID._id))
+    const blogs = await blogDB.find().where('_id').in(user.savedPosts).exec()
+    res.render('pages/blogs/savedBlogs',{data:blogs,user:user})
+
+}
+
+exports.hotBlogs = async (req,res)=>{
+    const hotBlogs = await axios.get(`http://localhost:${process.env.PORT}/api/blogs/hot`)
+    res.send(hotBlogs.data)
+}

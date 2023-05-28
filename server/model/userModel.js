@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
     },
     date_joined:Date,
     savedPosts: [{
-        type: String
+        type: Object
     }]
 })
 

@@ -32,10 +32,12 @@
     touch-action: manipulation;
 }
 
-.downvoted{
-        background-color:#FF3B3F;
+    .downvoted{
+        background-color: #e9e9ed;
     }
-.alreadyLikedButton{
+    
+    .alreadyLikedButton{
+    background-color:#FF3B3F;
     border-color: #000000;
     border-radius: 8px;
     border-style: none;
@@ -61,6 +63,7 @@
     -webkit-user-select: none;
     touch-action: manipulation;
 }
+
 </style>
 
 <div class="container">
@@ -91,13 +94,11 @@
                                     <div class="col">
                                         <!-- Like Button -->
                                         <%if (user.savedPosts.includes(data[i]._id)) {%>
-                                            <button class="alreadyLikedButton downvote" onclick="colorChanger(window.getComputedStyle(this).background,'<%=data[i]._id%>')">upVote</button>
-
+                                            <button class="alreadyLikedButton downvote" onclick="colorChanger(window.getComputedStyle(this).background,'<%=data[i]._id%>')">DownVote</button>
                                         <% } else {%>
-                                            <button> white</button>
+                                            <button class="likeButton upVote" onclick="colorChanger(window.getComputedStyle(this).background,'<%=data[i]._id%>')">UpVote</button>
                                             <%}%>
-                                        <button class="likeButton upVote" onclick="colorChanger(window.getComputedStyle(this).background,'<%=data[i]._id%>')">upVote</button>
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -112,9 +113,7 @@
     </div>
 </div>
 
-
 <script>
-
 </script>
 
 <%-include('../partials/_footer.ejs')%>
