@@ -71,4 +71,4 @@ exports.savedBlogs = async (req,res) => {
 exports.hotBlogs = async (req,res)=>{
     const hotBlogs = await axios.get(`http://localhost:${process.env.PORT}/api/blogs/hot`)
     res.send(hotBlogs.data)
-}
+}   

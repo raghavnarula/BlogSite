@@ -15,11 +15,13 @@ exports.homeRoute = async (req,res)=>{
         const verified = jwt.verify(token,process.env.secret_key)
 
         try{
-            const [request1, request2] = await Promise.all([
+            const [request1, request2,hotBlogs] = await Promise.all([
                 axios.get(`http://localhost:${process.env.PORT}/api/blog/all`),
-                axios.get(`http://localhost:${process.env.PORT}/api/user/find/${verified._id}`)
+                axios.get(`http://localhost:${process.env.PORT}/api/user/find/${verified._id}`),
+                axios.get(`http://localhost:${process.env.PORT}/api/blogs/hot`)
+
             ]);
-            res.render("pages/index",{data:request1.data,user:request2.data})
+            res.render("pages/index",{data:request1.data,user:request2.data,hotBlogs:hotBlogs.data})
         }
         catch(err){
             console.log(err)

@@ -223,8 +223,13 @@ exports.hotBlogs = async (req,res)=>{
           return -1;
         }
       });
-      
-    res.json(data.slice(0,5))
+    const blogsArray = new Array();
+    for (let i=0;i<num;i++){
+        blogsArray.push(data[i].id)
+    }
+    
+    const blogs = await blogDB.find({_id:{$in:blogsArray}})
+    res.json(blogs)
 
     
 }

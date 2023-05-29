@@ -108,6 +108,41 @@
             <% } %>
         </div>
         <div class="col-md-3">
+
+            <H1>Hot Blogs</H1>
+            <% for(var i=hotBlogs.length -1 ; i >= 0; i--) { %>
+                <div class="card">
+                    <div class="row">
+                        <div class="" >
+                            <img
+                            style="width: 100%;max-height:300px;height:100%",
+                            class="rounded"
+                            src="/img/blogUpdated/<%=hotBlogs[i].image%>"/>
+                        </div>
+                        <div class="">
+                            <div class="card-body">
+                                <h5 class="card-title"><%=hotBlogs[i].title%></h5>
+                                <p class="card-text"><%=hotBlogs[i].content.substring(0,50)+"..."%></p>
+                                <p class="card-text">
+                                    <small class="text-body-secondary"><strong>Last Updated: </strong><%=hotBlogs[i].date_posted%></small>
+                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="/blog/<%=data[i]._id%>" class="btn btn-primary">More..</a>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                    <!-- <div class="col">
+                                        </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            <% } %>
+
+
             <!-- Hot Blogs -->
         </div>
     </div>
