@@ -206,8 +206,11 @@ exports.savedPostsOfUser = async (req,res) => {
 
 
 exports.hotBlogs = async (req,res)=>{
-    const num = 5 // number of hot blogs to display
-    // we have to sort all blogs based on the likes.. and select the top num blogs
+
+    try{
+
+        const num = 5 // number of hot blogs to display
+        // we have to sort all blogs based on the likes.. and select the top num blogs
     const dataArray = new Array()
     const allBlogs = await blogDB.find({})
     for (let i = 0;i < Number(Object.keys(allBlogs).length);i++){
@@ -222,7 +225,7 @@ exports.hotBlogs = async (req,res)=>{
         if (a.likes > b.likes) {
           return -1;
         }
-      });
+    });
     const blogsArray = new Array();
     for (let i=0;i<num;i++){
         blogsArray.push(data[i].id)
@@ -230,5 +233,9 @@ exports.hotBlogs = async (req,res)=>{
     
     const blogs = await blogDB.find({_id:{$in:blogsArray}}).exec()
     res.json(blogs)
-
+    }
+    catch(error){
+        console.log(error)
+    }
+    
 }
