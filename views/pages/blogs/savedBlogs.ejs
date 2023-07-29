@@ -46,8 +46,8 @@
 
 <script>
     async function removeSaved(id){
-        await axios.post(`http://localhost:9001/api/blog/${id}/voting`,{"downvote":-1,"upvote":0})
-        await axios.patch(`http://localhost:9001/api/blog/${id}/unsave`)
+        await axios.post(`http://localhost:${process.env.PORT}/api/blog/${id}/voting`,{"downvote":-1,"upvote":0})
+        await axios.patch(`http://localhost:${process.env.PORT}/api/blog/${id}/unsave`)
         location.reload()
     }
 

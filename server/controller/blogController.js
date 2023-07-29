@@ -227,12 +227,19 @@ exports.hotBlogs = async (req,res)=>{
         }
     });
     const blogsArray = new Array();
-    for (let i=0;i<num;i++){
-        blogsArray.push(data[i].id)
-    }
+    if (data.length > 1){
     
-    const blogs = await blogDB.find({_id:{$in:blogsArray}}).exec()
-    res.json(blogs)
+        for (let i=0;i<num;i++){
+            // console.log(data[i])
+            blogsArray.push(data[i].id)
+        }
+        const blogs = await blogDB.find({_id:{$in:blogsArray}}).exec()
+        res.json(blogs)    
+    }
+    else {
+        res.json({"None":"None"})
+    }
+
     }
     catch(error){
         console.log(error)
