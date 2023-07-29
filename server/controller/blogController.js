@@ -228,8 +228,7 @@ exports.hotBlogs = async (req,res)=>{
         blogsArray.push(data[i].id)
     }
     
-    const blogs = await blogDB.find({_id:{$in:blogsArray}})
+    const blogs = await blogDB.find({_id:{$in:blogsArray}}).exec()
     res.json(blogs)
 
-    
 }
